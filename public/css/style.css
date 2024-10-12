@@ -253,11 +253,12 @@ a:focus,
 .intro h1 {
   font-family: "Raleway", sans-serif;
   color: #fff;
-  font-size: 60px;
+  font-size: 40px;
   font-weight: 700;
   text-transform: uppercase;
-  margin-top: 0;
+  margin-top: 60px;
   margin-bottom: 10px;
+  padding: 50px;
 }
 
 .intro h1 span {
@@ -275,7 +276,7 @@ a:focus,
 }
 
 header .intro-text {
-  padding-top: 200px;
+  padding-top: 100px;
   padding-bottom: 200px;
   text-align: center;
 }
@@ -622,8 +623,45 @@ label {
   background: #e0e0e0;
 }
 
-@media (max-width: 768px) {
-  #about img {
-    margin: 50px 0;
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  max-height: 60px; /* Ajusta el tamaño según sea necesario */
+  margin-right: 15px;
+  filter: invert(75%);
+}
+
+.responsive-h1 {
+  font-size: 3rem; /* Tamaño grande por defecto */
+}
+
+@media (max-width: 992px) { /* Para dispositivos medianos */
+  .logo-img {
+    max-height: 50px;
+  }
+  .responsive-h1 {
+    font-size: 2.5rem;
+  }
+  
+}
+
+@media (max-width: 768px) { /* Para dispositivos pequeños */
+  .logo-img {
+    max-height: 50px;
+  }
+  .responsive-h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) { /* Para dispositivos extra pequeños */
+  .logo-img {
+    max-height: 45px;
+  }
+  .responsive-h1 {
+    font-size: 1.5rem;
   }
 }

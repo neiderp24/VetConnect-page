@@ -5,9 +5,6 @@ export const Navigation = (props) => {
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
       <div className="container">
         <div className="navbar-header">
-          {/*<div>
-            <img src="img/horizontal-logo.png" className="logo-img" alt="" />{" "}
-          </div> */}
           <button
             type="button"
             className="navbar-toggle collapsed"
@@ -21,10 +18,9 @@ export const Navigation = (props) => {
             <span className="icon-bar"></span>{" "}
           </button>
           <a className="navbar-brand page-scroll" href="#page-top">
-            VetConnect
-          </a>{" "}
+            <img src="img/horizontal-logo.png" className="logo-img img-fluid" alt="Logo" />
+          </a>
         </div>
-
         <div
           className="collapse navbar-collapse"
           id="bs-example-navbar-collapse-1"

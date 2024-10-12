@@ -14,7 +14,6 @@ export const Contact = (props) => {
   // Definición del estado del formulario
   const [{ name, email, phone, message }, setState] = useState(initialState);
   const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState(false);
 
   // Maneja el cambio en los inputs
   const handleChange = (e) => {
@@ -23,14 +22,10 @@ export const Contact = (props) => {
     validateInput(e);
   };
 
-  // Limpiar estado del formulario
-  const clearState = () => setState({ ...initialState });
-
   // Validaciones de los inputs
   const validateInput = (e) => {
     const { name, value } = e.target;
     let errorMsg = "";
-
     if (name === "email") {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailPattern.test(value)) {
@@ -44,7 +39,6 @@ export const Contact = (props) => {
     } else if (name === "name" && value.trim().length === 0) {
       errorMsg = "El nombre no puede estar vacío.";
     }
-
     setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMsg }));
   };
 
@@ -54,6 +48,7 @@ export const Contact = (props) => {
 
     // Validar que no haya errores
     if (Object.values(errors).some((error) => error)) {
+      alert("Por favor, corrige los errores en el formulario.");
       return;
     }
 
@@ -75,13 +70,19 @@ export const Contact = (props) => {
       .then(
         (result) => {
           console.log("Correo enviado: ", result.text);
-          setSuccess(true); // Indicar éxito en el envío
+          alert("¡Gracias por tu mensaje! Hemos recibido tu correo y nuestro equipo se pondrá en contacto contigo lo antes posible."); // Mostrar alerta de éxito
           clearState(); // Limpiar formulario después del envío
         },
         (error) => {
           console.log("Error al enviar: ", error.text);
+          alert("Lo sentimos, hubo un problema al enviar tu correo. Por favor, intenta nuevamente. Nuestro equipo estará disponible para ayudarte."); // Mostrar alerta de error
         }
       );
+  };
+
+  // Limpiar estado del formulario
+  const clearState = () => {
+    setState({ ...initialState });
   };
 
   return (
@@ -105,15 +106,12 @@ export const Contact = (props) => {
                         type="text"
                         id="name"
                         name="name"
-                        className={`form-control ${
-                          errors.name ? "is-invalid" : success ? "is-valid" : ""
-                        }`}
+                        className={`form-control ${errors.name ? "is-invalid" : ""}`}
                         placeholder="Nombre"
                         required
                         value={name}
                         onChange={handleChange}
                       />
-                      {/* No mostrar mensajes de validación personalizados */}
                       <div className="invalid-feedback">{errors.name}</div>
                     </div>
                   </div>
@@ -123,15 +121,12 @@ export const Contact = (props) => {
                         type="email"
                         id="email"
                         name="email"
-                        className={`form-control ${
-                          errors.email ? "is-invalid" : success ? "is-valid" : ""
-                        }`}
+                        className={`form-control ${errors.email ? "is-invalid" : ""}`}
                         placeholder="Correo electrónico"
                         required
                         value={email}
                         onChange={handleChange}
                       />
-                      {/* No mostrar mensajes de validación personalizados */}
                       <div className="invalid-feedback">{errors.email}</div>
                     </div>
                   </div>
@@ -141,15 +136,12 @@ export const Contact = (props) => {
                         type="text"
                         id="phone"
                         name="phone"
-                        className={`form-control ${
-                          errors.phone ? "is-invalid" : success ? "is-valid" : ""
-                        }`}
+                        className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                         placeholder="Teléfono"
                         required
                         value={phone}
                         onChange={handleChange}
                       />
-                      {/* No mostrar mensajes de validación personalizados */}
                       <div className="invalid-feedback">{errors.phone}</div>
                     </div>
                   </div>
@@ -166,7 +158,6 @@ export const Contact = (props) => {
                     onChange={handleChange}
                   ></textarea>
                 </div>
-                <div id="success"></div>
                 <button type="submit" className="btn btn-custom btn-lg">
                   Enviar mensaje
                 </button>
